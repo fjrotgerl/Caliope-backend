@@ -12,9 +12,11 @@ public class PlaylistCanciones {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "playlist_fk")
     private Playlist playlist;
 
     @ManyToOne
+    @JoinColumn(name = "cancion_fk")
     private Cancion cancion;
 
     public Integer getId() {

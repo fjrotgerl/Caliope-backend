@@ -20,9 +20,11 @@ public class Cancion {
     private String path;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_fk")
     private Usuario autor;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "genero_fk")
     private Genero genero;
 
     public Integer getId() {
