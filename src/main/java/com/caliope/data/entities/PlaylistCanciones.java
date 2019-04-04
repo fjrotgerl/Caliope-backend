@@ -1,7 +1,6 @@
 package com.caliope.data.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class PlaylistCanciones {
