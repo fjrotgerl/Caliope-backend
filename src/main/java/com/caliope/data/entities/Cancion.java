@@ -1,6 +1,7 @@
 package com.caliope.data.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Cancion {
@@ -26,6 +27,9 @@ public class Cancion {
     @ManyToOne
     @JoinColumn(name = "genero_fk")
     private Genero genero;
+
+    @Column(name = "fecha_registro")
+    private Date fechaRegistro;
 
     public Integer getId() {
         return id;
@@ -73,5 +77,13 @@ public class Cancion {
 
     public void setGenero(Genero genero) {
         this.genero = genero;
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }

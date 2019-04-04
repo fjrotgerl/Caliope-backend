@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PlaylistCancionesRepository extends CrudRepository<PlaylistCanciones, Integer> {
 
-    @Query(value = "SELECT Cancion.* FROM playlist_canciones PlaylistC " +
+   @Query(value = "SELECT Cancion.* FROM playlist_canciones PlaylistC " +
             "INNER JOIN cancion Cancion " +
             "INNER JOIN playlist Playlist " +
             "INNER JOIN usuario Usuario " +
