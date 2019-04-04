@@ -3,6 +3,7 @@ package com.caliope.data.controllers;
 import com.caliope.data.entities.*;
 import com.caliope.data.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,9 +56,10 @@ public class Controller {
     }
 
     /* Seguidores */
-    @RequestMapping(value = "/getSeguidores", method = RequestMethod.GET, produces = {"application/json"})
-    public @ResponseBody List<Seguidor> getSeguidores() {
-        return (List<Seguidor>) this.seguidorRepository.findAll();
+    /* Obtener followers */
+    @RequestMapping(value = "/getSeguidores/{usuario}", method = RequestMethod.GET, produces = {"application/json"})
+    public @ResponseBody List<Usuario> getSeguidores(@PathVariable(value = "usuario") String nombreUsuario) {
+        return this.seguidorRepository.getSeguidoresDeUsuario(nombreUsuario);
     }
 
     /* Usuarios */
@@ -65,4 +67,7 @@ public class Controller {
     public @ResponseBody List<Usuario> getUsuarios() {
         return (List<Usuario>) this.usuarioRepository.findAll();
     }
+
+    /* Consultas personalizadas */
+
 }
