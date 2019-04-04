@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@org.springframework.stereotype.Controller
-public class Controller {
+@org.springframework.web.bind.annotation.RestController
+public class RestController {
 
     @Autowired
     private CancionRepository cancionRepository;
@@ -36,7 +36,7 @@ public class Controller {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Canciones */
-    @RequestMapping(value = "/getCanciones", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getCanciones", method = RequestMethod.GET)
     public @ResponseBody List<Cancion> getCanciones() {
         return (List<Cancion>) this.cancionRepository.findAll();
     }
@@ -44,7 +44,7 @@ public class Controller {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Generos */
-    @RequestMapping(value = "/getGeneros", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getGeneros", method = RequestMethod.GET)
     public @ResponseBody List<Genero> getGeneros() {
         return (List<Genero>) this.generoRepository.findAll();
     }
@@ -52,7 +52,7 @@ public class Controller {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Playlists */
-    @RequestMapping(value = "/getPlaylist", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getPlaylist", method = RequestMethod.GET)
     public @ResponseBody List<Playlist> getPlaylists() {
         return (List<Playlist>) this.playlistRepository.findAll();
     }
@@ -60,7 +60,7 @@ public class Controller {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* PlaylistCanciones */
-    @RequestMapping(value = "/getPlaylistCanciones", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getPlaylistCanciones", method = RequestMethod.GET)
     public @ResponseBody List<PlaylistCanciones> getPlaylistCanciones() {
         return (List<PlaylistCanciones>) this.playlistCancionesRepository.findAll();
     }
@@ -69,7 +69,7 @@ public class Controller {
 
     /* Obtener todas las canciones de una playlist en concreto */
     /* NO FUNCIONA */
-    @RequestMapping(value = "/getCancionesFromPlaylist/{username}/{nombrePlaylist}", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getCancionesFromPlaylist/{username}/{nombrePlaylist}", method = RequestMethod.GET)
     public @ResponseBody List<Cancion> getPlaylistCanciones(@PathVariable("username") String username, @PathVariable("nombrePlaylist") String nombrePlaylist) {
         return this.playlistCancionesRepository.getCancionesFromPlaylist(username, nombrePlaylist);
     }
@@ -78,7 +78,7 @@ public class Controller {
 
     /* Seguidores */
     /* Obtener seguidores de 'x' usuario */
-    @RequestMapping(value = "/getSeguidores/{usuario}", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getSeguidores/{usuario}", method = RequestMethod.GET)
     public @ResponseBody List<Optional<Usuario>> getSeguidores(@PathVariable(value = "usuario") String usuario) {
         List<Optional<Usuario>> usuarios = new ArrayList<>();
         for ( String nombre : this.seguidorRepository.getSeguidoresDeUsuario(usuario)) {
@@ -89,7 +89,7 @@ public class Controller {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Obtener la gente que sigue 'x' usuario */
-    @RequestMapping(value = "/getSeguidos/{usuario}", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getSeguidos/{usuario}", method = RequestMethod.GET)
     public @ResponseBody List<Optional<Usuario>> getSeguidos(@PathVariable(value = "usuario") String usuario) {
         List<Optional<Usuario>> usuarios = new ArrayList<>();
         for ( String nombre : this.seguidorRepository.getSeguidosDeUsuario(usuario)) {
@@ -101,14 +101,14 @@ public class Controller {
 
     /* Usuarios */
     /* Obtener todos los usuarios */
-    @RequestMapping(value = "/getUsuarios", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getUsuarios", method = RequestMethod.GET)
     public @ResponseBody List<Usuario> getUsuarios() {
         return (List<Usuario>) this.usuarioRepository.findAll();
     }
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Obtener usuario por username */
-    @RequestMapping(value = "/getUsuarioById/{usuarioId}", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/getUsuarioById/{usuarioId}", method = RequestMethod.GET)
     public @ResponseBody
     Optional<Usuario> getUsuario(@PathVariable("usuarioId") String usuarioId) {
         return this.usuarioRepository.findById(usuarioId);
