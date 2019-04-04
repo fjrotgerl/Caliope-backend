@@ -2,7 +2,6 @@ package com.caliope.data.controllers;
 
 import com.caliope.data.entities.*;
 import com.caliope.data.repositories.*;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -57,6 +55,12 @@ public class Controller {
     @RequestMapping(value = "/getPlaylistCanciones", method = RequestMethod.GET, produces = {"application/json"})
     public @ResponseBody List<PlaylistCanciones> getPlaylistCanciones() {
         return (List<PlaylistCanciones>) this.playlistCancionesRepository.findAll();
+    }
+
+    /* Obtener todas las canciones de una playlist en concreto */
+    @RequestMapping(value = "/getCancionesFromPlaylist/{username}/{nombrePlaylist}", method = RequestMethod.GET, produces = {"application/json"})
+    public @ResponseBody List<Cancion> getPlaylistCanciones(@PathVariable("username") String username, @PathVariable("nombrePlaylist") String nombrePlaylist) {
+        return this.playlistCancionesRepository.getCancionesFromPlaylist(username, nombrePlaylist);
     }
 
     /* Seguidores */
