@@ -1,4 +1,4 @@
-package com.caliope.data.models;
+package com.caliope.data.entities;
 
 import javax.persistence.*;
 
@@ -10,9 +10,11 @@ public class Seguidor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
+    @ManyToOne
     @Column(name = "usuario_fk")
     private Usuario usuarioSeguido;
 
+    @ManyToOne
     @Column(name = "usuario_seguidor_fk")
     private Usuario seguidor;
 

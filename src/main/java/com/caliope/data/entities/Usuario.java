@@ -1,4 +1,4 @@
-package com.caliope.data.models;
+package com.caliope.data.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
