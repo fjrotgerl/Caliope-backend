@@ -12,12 +12,10 @@ public class PlaylistCanciones {
     private Integer id;
 
     @ManyToOne
-    @Column(name = "playlist_fk")
     private Playlist playlist;
 
     @ManyToOne
-    @Column(name = "cancion_fk")
-    private List<Cancion> canciones;
+    private Cancion cancion;
 
     public Integer getId() {
         return id;
@@ -35,11 +33,11 @@ public class PlaylistCanciones {
         this.playlist = playlist;
     }
 
-    public List<Cancion> getCanciones() {
-        return canciones;
+    public Cancion getCanciones() {
+        return cancion;
     }
 
-    public void setCanciones(List<Cancion> canciones) {
-        this.canciones = canciones;
+    public void setCanciones(Cancion canciones) {
+        this.cancion = canciones;
     }
 }

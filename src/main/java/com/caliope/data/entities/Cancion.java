@@ -20,11 +20,9 @@ public class Cancion {
     private String path;
 
     @ManyToOne
-    @Column(name = "usuario_fk")
     private Usuario autor;
 
     @OneToOne
-    @Column(name = "genero_pk")
     private Genero genero;
 
     public Integer getId() {

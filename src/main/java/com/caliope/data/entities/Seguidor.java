@@ -11,11 +11,9 @@ public class Seguidor {
     private String id;
 
     @ManyToOne
-    @Column(name = "usuario_fk")
     private Usuario usuarioSeguido;
 
     @ManyToOne
-    @Column(name = "usuario_seguidor_fk")
     private Usuario seguidor;
 
     public String getId() {

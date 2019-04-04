@@ -14,7 +14,6 @@ public class Playlist {
     private String nombre;
 
     @ManyToOne
-    @Column(name = "usuario_fk")
     private Usuario dueño;
 
     public Integer getId() {
