@@ -41,6 +41,18 @@ public class RestController {
         return (List<Cancion>) this.cancionRepository.findAll();
     }
 
+    /* Añadir cancion */
+    @RequestMapping(value = "/añadir/cancion", method = RequestMethod.POST)
+    public @ResponseBody InfoEntity añadirCancion(@RequestBody Cancion cancion) {
+
+        if (this.cancionRepository.findById(cancion.getId()).isPresent()) { return new InfoEntity(HttpStatus.CONFLICT,"Cancion duplicada"); }
+
+        this.cancionRepository.save(cancion);
+
+        return new InfoEntity(HttpStatus.OK,"Canción añadida");
+
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* ------------------------------------------------------------------------------------------------------- */
@@ -64,6 +76,18 @@ public class RestController {
     @RequestMapping(value = "/getPlaylistCanciones", method = RequestMethod.GET)
     public @ResponseBody List<PlaylistCanciones> getPlaylistCanciones() {
         return (List<PlaylistCanciones>) this.playlistCancionesRepository.findAll();
+    }
+
+    /* Añadir playlist */
+    @RequestMapping(value = "/añadir/playlist", method = RequestMethod.POST)
+    public @ResponseBody InfoEntity añadirPlaylist(@RequestBody Playlist playlist) {
+
+        if (this.playlistRepository.findById(playlist.getId()).isPresent()) { return new InfoEntity(HttpStatus.CONFLICT,"Playlist duplicada"); }
+
+        this.playlistRepository.save(playlist);
+
+        return new InfoEntity(HttpStatus.OK,"Playlist añadida");
+
     }
 
     /* ------------------------------------------------------------------------------------------------------- */
