@@ -5,13 +5,12 @@ import com.caliope.data.authenticator.local.Estado;
 import com.caliope.data.entities.Usuario;
 import com.caliope.data.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class AuthController {
 
