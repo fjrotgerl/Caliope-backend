@@ -15,23 +15,23 @@ import java.util.Optional;
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
 
-    @Autowired
     private CancionRepository cancionRepository;
-
-    @Autowired
     private GeneroRepository generoRepository;
-
-    @Autowired
     private PlaylistRepository playlistRepository;
-
-    @Autowired
     private PlaylistCancionesRepository playlistCancionesRepository;
-
-    @Autowired
     private UsuarioRepository usuarioRepository;
+    private SeguidorRepository seguidorRepository;
 
     @Autowired
-    private SeguidorRepository seguidorRepository;
+    public RestController(CancionRepository cancionRepository, GeneroRepository generoRepository, PlaylistRepository playlistRepository,
+                          PlaylistCancionesRepository playlistCancionesRepository, UsuarioRepository usuarioRepository, SeguidorRepository seguidorRepository) {
+        this.cancionRepository = cancionRepository;
+        this.generoRepository = generoRepository;
+        this.playlistRepository = playlistRepository;
+        this.playlistCancionesRepository = playlistCancionesRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.seguidorRepository = seguidorRepository;
+    }
 
     /* ------------------------------------------------------------------------------------------------------- */
 
