@@ -138,8 +138,7 @@ public class RestController {
 
     /* Registrar usuario */
     @RequestMapping(value = "/registro", method = RequestMethod.POST)
-    public @ResponseBody
-    InfoEntity añadirUsuario(@RequestBody Usuario usuario) {
+    public @ResponseBody InfoEntity añadirUsuario(@RequestBody Usuario usuario) {
 
         if (this.usuarioRepository.findById(usuario.getUsername()).isPresent()) { return new InfoEntity(HttpStatus.NOT_FOUND,"Usuario duplicado"); }
 
@@ -153,9 +152,15 @@ public class RestController {
 
     /* Obtener usuario por username */
     @RequestMapping(value = "/getUsuarioById/{usuarioId}", method = RequestMethod.GET)
-    public @ResponseBody
-    Optional<Usuario> getUsuario(@PathVariable("usuarioId") String usuarioId) {
-        return this.usuarioRepository.findById(usuarioId);
+    public @ResponseBody Usuario getUsuario(@PathVariable("usuarioId") String usuarioId) {
+        return this.usuarioRepository.findUsuarioByUsername(usuarioId);
+    }
+    /* ------------------------------------------------------------------------------------------------------- */
+
+    /* Obtener usuario por Google Id */
+    @RequestMapping(value = "/getUsuarioByGoogleId/{googleId}", method = RequestMethod.GET)
+    public @ResponseBody Usuario getUsuarioByGoogleId(@PathVariable("googleId") Integer googleId) {
+        return this.usuarioRepository.findUsuarioByGoogleId(googleId);
     }
     /* ------------------------------------------------------------------------------------------------------- */
 

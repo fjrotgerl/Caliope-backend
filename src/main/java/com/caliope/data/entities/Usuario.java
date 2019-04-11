@@ -38,6 +38,9 @@ public class Usuario {
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
 
+    @Column(name = "google_id")
+    private Integer googleId;
+
 
     public String getUsername() {
         return username;
@@ -111,4 +114,11 @@ public class Usuario {
         this.fechaRegistro = fecha_registro;
     }
 
+    public Integer getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(Integer googleId) {
+        this.googleId = googleId;
+    }
 }
