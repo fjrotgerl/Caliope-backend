@@ -145,7 +145,7 @@ public class RestController {
 
         this.usuarioRepository.save(usuario);
 
-        return new InfoEntity(HttpStatus.OK,"Usuario añadido");
+        return new InfoEntity(HttpStatus.OK,"Usuario creado", usuario);
 
     }
 
@@ -155,6 +155,13 @@ public class RestController {
     @RequestMapping(value = "/getUsuarioById/{usuarioId}", method = RequestMethod.GET)
     public @ResponseBody Usuario getUsuario(@PathVariable("usuarioId") String usuarioId) {
         return this.usuarioRepository.findUsuarioByUsername(usuarioId);
+    }
+
+    /* ------------------------------------------------------------------------------------------------------- */
+    /* Obtener usuario por email */
+    @RequestMapping(value = "/getUsuarioByEmail/{usuarioEmail}", method = RequestMethod.GET)
+    public @ResponseBody Usuario getUsuarioByEmail(@PathVariable("usuarioEmail") String usuarioEmail) {
+        return this.usuarioRepository.findUsuarioByEmail(usuarioEmail);
     }
     /* ------------------------------------------------------------------------------------------------------- */
 
