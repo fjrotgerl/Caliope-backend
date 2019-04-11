@@ -39,7 +39,7 @@ public class Usuario {
     private Date fechaRegistro;
 
     @Column(name = "google_id")
-    private Integer googleId;
+    private String googleId;
 
 
     public String getUsername() {
@@ -114,11 +114,11 @@ public class Usuario {
         this.fechaRegistro = fecha_registro;
     }
 
-    public Integer getGoogleId() {
+    public String getGoogleId() {
         return googleId;
     }
 
-    public void setGoogleId(Integer googleId) {
+    public void setGoogleId(String googleId) {
         this.googleId = googleId;
     }
 }
