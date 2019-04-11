@@ -160,7 +160,7 @@ public class RestController {
 
     /* Obtener usuario por Google Id */
     @RequestMapping(value = "/getUsuarioByGoogleId/{googleId}", method = RequestMethod.GET)
-    public @ResponseBody Usuario getUsuarioByGoogleId(@PathVariable("googleId") Integer googleId) {
+    public @ResponseBody Usuario getUsuarioByGoogleId(@PathVariable("googleId") String googleId) {
         return this.usuarioRepository.findUsuarioByGoogleId(googleId);
     }
     /* ------------------------------------------------------------------------------------------------------- */
