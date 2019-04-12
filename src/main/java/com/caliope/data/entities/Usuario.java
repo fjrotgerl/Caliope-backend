@@ -41,6 +41,9 @@ public class Usuario {
     @Column(name = "google_id")
     private String googleId;
 
+    @Column(name = "usuario_token")
+    private String token;
+
 
     public String getUsername() {
         return username;
@@ -120,5 +123,13 @@ public class Usuario {
 
     public void setGoogleId(String googleId) {
         this.googleId = googleId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

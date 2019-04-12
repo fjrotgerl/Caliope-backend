@@ -165,4 +165,11 @@ public class RestController {
     }
     /* ------------------------------------------------------------------------------------------------------- */
 
+    /* Añadir o modificar token de usuario */
+    @RequestMapping(value = "/setUsuarioToken", method = RequestMethod.PUT)
+    public @ResponseBody int setUsuarioToken(@RequestParam String token, @RequestParam String username) {
+        return this.usuarioRepository.setUsuarioToken(token,username);
+    }
+    /* ------------------------------------------------------------------------------------------------------- */
+
 }
