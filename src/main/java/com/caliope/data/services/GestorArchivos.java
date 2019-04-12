@@ -1,14 +1,11 @@
 package com.caliope.data.services;
 
-import com.caliope.data.repositories.UsuarioRepository;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,12 +17,6 @@ public class GestorArchivos {
 
     @Value("${fichero.subida}")
     private String directorio;
-
-    private UsuarioRepository usuarioRepository;
-
-    public GestorArchivos(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
 
     public void subir(MultipartFile file, String username) {
         try {
