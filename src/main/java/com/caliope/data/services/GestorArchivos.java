@@ -43,9 +43,9 @@ public class GestorArchivos {
         }
     }
 
-    public byte[] obtenerCancion() {
+    public byte[] obtenerCancion(String username, String nombreCancion) {
 
-        File file = new File("C:\\Users\\javier.rotger\\IdeaProjects\\CaliopeSpringData\\src\\main\\java\\com\\caliope\\data\\services\\iphone-notificacion.mp3");
+        File file = new File("src/main/resources/files/" + username + "/mis_canciones/" + nombreCancion + ".mp3");
 
         byte[] b = new byte[(int) file.length()];
 

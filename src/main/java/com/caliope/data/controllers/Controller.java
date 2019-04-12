@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -41,11 +43,8 @@ public class Controller {
 
     }
 
-    //@RequestMapping(value = "/obtenerCancion/{username}/{nombreCancion}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    //public @ResponseBody byte[] obtenerCancion(@PathVariable("username") String username, @PathVariable("nombreCancion") String nombreCancion) throws IOException {
-
-    @RequestMapping(value = "/obtenerCancion", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public @ResponseBody byte[] obtenerCancion() {
-        return this.gestorArchivos.obtenerCancion();
+    @RequestMapping(value = "/obtenerCancion/{username}/{nombreCancion}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public @ResponseBody byte[] obtenerCancion(@PathVariable("username") String username, @PathVariable("nombreCancion") String nombreCancion) {
+        return this.gestorArchivos.obtenerCancion(username,nombreCancion);
     }
 }
