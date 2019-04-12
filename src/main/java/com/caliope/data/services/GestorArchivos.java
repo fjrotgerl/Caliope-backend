@@ -9,14 +9,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class GestorArchivos {
 
     @Value("${fichero.subida}")
     private String directorio;
+
+    @Value("${fichero.formatos}")
+    private String formatos;
 
     public void subir(MultipartFile file, String username) {
         try {
@@ -40,11 +41,9 @@ public class GestorArchivos {
     }
 
     public boolean comprobarFormatosValidos(MultipartFile file) {
-        List<String> formatos = new ArrayList<>();
+        String[] formatosArray = this.formatos.split(",");
 
-        formatos.add("mp3");
-
-        for (String formato : formatos) {
+        for (String formato : formatosArray) {
             if (formato.equals(getFileExtension(file))) {
                 return true;
             }
