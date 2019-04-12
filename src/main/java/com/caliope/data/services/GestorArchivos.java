@@ -15,10 +15,22 @@ public class GestorArchivos {
     @Value("${fichero.subida}")
     private String directorio;
 
-    public void subir(MultipartFile file) throws IOException {
+    public void subir(MultipartFile file, String username) throws IOException {
         if (!file.isEmpty()) {
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(this.directorio + file.getOriginalFilename());
+            String directorioSinArchivo = this.directorio + "//" + username + "//mis_canciones//";
+            Path path = Paths.get(directorioSinArchivo);
+
+            if (!Files.exists(path)) {
+                try {
+                    Files.createDirectories(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            path = Paths.get(directorioSinArchivo + file.getOriginalFilename());
+
             Files.write(path,bytes);
         }
     }

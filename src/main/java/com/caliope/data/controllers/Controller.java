@@ -20,13 +20,14 @@ public class Controller {
     }
 
     @RequestMapping(value = "/subirCancion", method = RequestMethod.POST)
-    public ResponseEntity<?> subirCancion(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> subirCancion(@RequestParam("file") MultipartFile file, @RequestParam("username") String username) {
+
         if (file.isEmpty()) {
             return new ResponseEntity<Object>("Seleccionar un archivo", HttpStatus.OK);
         }
 
         try {
-            this.gestorArchivos.subir(file);
+            this.gestorArchivos.subir(file,username);
         } catch (IOException e) {
             e.printStackTrace();
         }
