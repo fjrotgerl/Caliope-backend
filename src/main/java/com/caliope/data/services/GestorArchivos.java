@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,6 +41,27 @@ public class GestorArchivos {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public byte[] obtenerCancion() {
+
+        File file = new File("C:\\Users\\javier.rotger\\IdeaProjects\\CaliopeSpringData\\src\\main\\java\\com\\caliope\\data\\services\\iphone-notificacion.mp3");
+
+        byte[] b = new byte[(int) file.length()];
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(b);
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found.");
+            e.printStackTrace();
+        }
+        catch (IOException e1) {
+            System.out.println("Error Reading The File.");
+            e1.printStackTrace();
+        }
+
+        return b;
     }
 
     public boolean comprobarFormatosValidos(MultipartFile file) {

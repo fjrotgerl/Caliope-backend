@@ -3,12 +3,12 @@ package com.caliope.data.controllers;
 import com.caliope.data.repositories.UsuarioRepository;
 import com.caliope.data.services.GestorArchivos;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @org.springframework.stereotype.Controller
 public class Controller {
 
@@ -39,5 +39,13 @@ public class Controller {
 
         return new ResponseEntity<Object>("Archivo subido correctamente", HttpStatus.OK);
 
+    }
+
+    //@RequestMapping(value = "/obtenerCancion/{username}/{nombreCancion}", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    //public @ResponseBody byte[] obtenerCancion(@PathVariable("username") String username, @PathVariable("nombreCancion") String nombreCancion) throws IOException {
+
+    @RequestMapping(value = "/obtenerCancion", method = RequestMethod.GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public @ResponseBody byte[] obtenerCancion() {
+        return this.gestorArchivos.obtenerCancion();
     }
 }
