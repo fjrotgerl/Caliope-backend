@@ -21,16 +21,19 @@ public class RestController {
     private PlaylistCancionesRepository playlistCancionesRepository;
     private UsuarioRepository usuarioRepository;
     private SeguidorRepository seguidorRepository;
+    private CancionesMeGustaRepository cancionesMeGustaRepository;
 
     @Autowired
     public RestController(CancionRepository cancionRepository, GeneroRepository generoRepository, PlaylistRepository playlistRepository,
-                          PlaylistCancionesRepository playlistCancionesRepository, UsuarioRepository usuarioRepository, SeguidorRepository seguidorRepository) {
+                          PlaylistCancionesRepository playlistCancionesRepository, UsuarioRepository usuarioRepository, SeguidorRepository seguidorRepository,
+                          CancionesMeGustaRepository cancionesMeGustaRepository) {
         this.cancionRepository           = cancionRepository;
         this.generoRepository            = generoRepository;
         this.playlistRepository          = playlistRepository;
         this.playlistCancionesRepository = playlistCancionesRepository;
         this.usuarioRepository           = usuarioRepository;
         this.seguidorRepository          = seguidorRepository;
+        this.cancionesMeGustaRepository  = cancionesMeGustaRepository;
     }
 
     /* ------------------------------------------------------------------------------------------------------- */
@@ -52,6 +55,17 @@ public class RestController {
 
         return new InfoEntity(HttpStatus.OK,"Canción añadida");
 
+    }
+
+    /* Obtener las canciones las cuales un usuario ha dado me gusta */
+    @RequestMapping(value = "/getLikedSongsByUserId/{userId}", method = RequestMethod.GET)
+    public @ResponseBody List<Optional<Cancion>> getLikedSongsByUserId (@PathVariable("userId") String userId) {
+
+        List<Optional<Cancion>> canciones = new ArrayList<>();
+        for ( Integer idCancion : this.cancionesMeGustaRepository.getLikedSongsByUserId(userId)) {
+            if (this.cancionRepository.findById(idCancion).isPresent()) { canciones.add(this.cancionRepository.findById(idCancion)); }
+        }
+        return canciones;
     }
 
     /* ------------------------------------------------------------------------------------------------------- */
@@ -162,6 +176,14 @@ public class RestController {
     @RequestMapping(value = "/getUsuarioByEmail/{usuarioEmail}", method = RequestMethod.GET)
     public @ResponseBody Usuario getUsuarioByEmail(@PathVariable("usuarioEmail") String usuarioEmail) {
         return this.usuarioRepository.findUsuarioByEmail(usuarioEmail);
+    }
+    /* ------------------------------------------------------------------------------------------------------- */
+
+    /* ------------------------------------------------------------------------------------------------------- */
+    /* Obtener usuario por token */
+    @RequestMapping(value = "/getUsuarioByToken/{userToken}", method = RequestMethod.GET)
+    public @ResponseBody Usuario getUsuarioByToken(@PathVariable("userToken") String userToken) {
+        return this.usuarioRepository.findUsuarioByToken(userToken);
     }
     /* ------------------------------------------------------------------------------------------------------- */
 

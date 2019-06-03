@@ -14,9 +14,13 @@ public interface UsuarioRepository extends CrudRepository<Usuario, String> {
 
     Usuario findUsuarioByEmail(String email);
 
+    Usuario findUsuarioByToken(String token);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE usuario SET usuario_token = :token WHERE username = :username ;", nativeQuery = true)
     int setUsuarioToken(@Param("token") String token, @Param("username") String username);
+
+
 
 }
