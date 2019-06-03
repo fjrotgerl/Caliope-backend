@@ -117,6 +117,12 @@ public class RestController {
 
     }
 
+    /* Añadir cancion a playlist */
+    @RequestMapping(value = "/addSongToPlaylist/{playlistId}/{cancionId}", method = RequestMethod.PUT)
+    public @ResponseBody int addSongToPlaylist(@PathVariable("playlistId") Integer playlistId, @PathVariable("cancionId") Integer cancionId) {
+        return this.playlistCancionesRepository.addSongToPlaylist(playlistId, cancionId);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Obtener todas las canciones de una playlist en concreto */
