@@ -68,6 +68,18 @@ public class RestController {
         return canciones;
     }
 
+    /* Añadir cancion a me gusta */
+    @RequestMapping(value = "/addSongToLikedList/{cancionId}/{userId}", method = RequestMethod.PUT)
+    public @ResponseBody int addSongToLikedList (@PathVariable("cancionId") Integer cancionId, @PathVariable("userId") String userId) {
+        return this.cancionesMeGustaRepository.addNewLikeSong(userId,cancionId);
+    }
+
+    /* Borrar cancion de me gusta */
+    @RequestMapping(value = "/removeSongFromLikedList/{cancionId}/{userId}", method = RequestMethod.POST)
+    public @ResponseBody int removeSongFromLikedList (@PathVariable("cancionId") Integer cancionId, @PathVariable("userId") String userId) {
+        return this.cancionesMeGustaRepository.deleteByUsuarioAndCancion(userId, cancionId);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* ------------------------------------------------------------------------------------------------------- */

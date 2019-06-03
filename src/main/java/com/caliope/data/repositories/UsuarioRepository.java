@@ -22,5 +22,5 @@ public interface UsuarioRepository extends CrudRepository<Usuario, String> {
     int setUsuarioToken(@Param("token") String token, @Param("username") String username);
 
 
-
+    
 }

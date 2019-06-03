@@ -3,6 +3,7 @@ package com.caliope.data.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "canciones_megusta")
 public class CancionesMeGusta {
 
     @Id
