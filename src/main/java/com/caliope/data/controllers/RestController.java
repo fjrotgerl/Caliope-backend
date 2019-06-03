@@ -105,7 +105,16 @@ public class RestController {
         return (List<PlaylistCanciones>) this.playlistCancionesRepository.findAll();
     }
 
-    /* Añadir playlist */
+    /* Encontrar todas las playlists de un usuario */
+    @RequestMapping(value = "/getUserPlaylistsByUserId/{userId}", method = RequestMethod.GET)
+    public @ResponseBody List<Playlist> getUserPlaylistsByUserId2(@PathVariable("userId") String userId) {
+
+        return this.playlistRepository.getAllUserPlaylists(userId);
+    }
+
+
+
+        /* Añadir playlist */
     @RequestMapping(value = "/añadir/playlist", method = RequestMethod.POST)
     public @ResponseBody InfoEntity añadirPlaylist(@RequestBody Playlist playlist) {
 
