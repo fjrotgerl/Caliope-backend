@@ -126,10 +126,14 @@ public class RestController {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Obtener todas las canciones de una playlist en concreto */
-    /* NO FUNCIONA */
-    @RequestMapping(value = "/getCancionesFromPlaylist/{username}/{nombrePlaylist}", method = RequestMethod.GET)
-    public @ResponseBody List<Cancion> getPlaylistCanciones(@PathVariable("username") String username, @PathVariable("nombrePlaylist") String nombrePlaylist) {
-        return this.playlistCancionesRepository.getCancionesFromPlaylist(username, nombrePlaylist);
+    @RequestMapping(value = "/getCancionesFromPlaylist/{playlistId}", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Optional<Cancion>> getPlaylistCanciones(@PathVariable("playlistId") Integer playlistId) {
+        List<Optional<Cancion>> canciones = new ArrayList<>();
+        for ( Integer cancionId : this.playlistCancionesRepository.getAllPlaylistSong(playlistId)) {
+            if (this.cancionRepository.findById(cancionId).isPresent()) { canciones.add(this.cancionRepository.findById(cancionId)); }
+        }
+        return canciones;
     }
 
     /* ------------------------------------------------------------------------------------------------------- */
