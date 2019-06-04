@@ -57,6 +57,22 @@ public class RestController {
 
     }
 
+    /* Obtener todas las canciones de un usuario */
+    @RequestMapping(value = "/getSongsFromUser/{userId}", method = RequestMethod.GET)
+    public @ResponseBody List<Optional<Cancion>> getSongsFromUser(@PathVariable("userId") String userId ) {
+        List<Optional<Cancion>> canciones = new ArrayList<>();
+        for ( Integer idCancion : this.cancionRepository.getSongsFromUserById(userId)) {
+            if (this.cancionRepository.findById(idCancion).isPresent()) { canciones.add(this.cancionRepository.findById(idCancion)); }
+        }
+        return canciones;
+    }
+
+    /* Eliminar una cancion por id de cancion */
+    @RequestMapping(value = "/deleteSongById/{cancionId}", method = RequestMethod.PUT)
+    public @ResponseBody Integer deleteSongById(@PathVariable("cancionId") Integer cancionId) {
+        return this.cancionRepository.deleteSongById(cancionId);
+    }
+
     /* Obtener las canciones las cuales un usuario ha dado me gusta */
     @RequestMapping(value = "/getLikedSongsByUserId/{userId}", method = RequestMethod.GET)
     public @ResponseBody List<Optional<Cancion>> getLikedSongsByUserId (@PathVariable("userId") String userId) {
