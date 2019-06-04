@@ -45,6 +45,12 @@ public class RestController {
         return (List<Cancion>) this.cancionRepository.findAll();
     }
 
+    /* Obtener cancion por id */
+    @RequestMapping(value = "/getCancionById/{cancionId}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Cancion> getUsuario(@PathVariable("cancionId") Integer cancionId) {
+        return this.cancionRepository.findById(cancionId);
+    }
+
     /* Añadir cancion */
     @RequestMapping(value = "/añadir/cancion", method = RequestMethod.POST)
     public @ResponseBody InfoEntity añadirCancion(@RequestBody Cancion cancion) {
@@ -113,8 +119,7 @@ public class RestController {
     }
 
 
-
-        /* Añadir playlist */
+    /* Añadir playlist */
     @RequestMapping(value = "/añadir/playlist", method = RequestMethod.POST)
     public @ResponseBody InfoEntity añadirPlaylist(@RequestBody Playlist playlist) {
 
@@ -219,9 +224,9 @@ public class RestController {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Añadir o modificar token de usuario */
-    @RequestMapping(value = "/setUsuarioToken", method = RequestMethod.PUT)
-    public @ResponseBody int setUsuarioToken(@RequestParam String token, @RequestParam String username) {
-        return this.usuarioRepository.setUsuarioToken(token,username);
+    @RequestMapping(value = "/setUsuarioToken/{userId}/{token}", method = RequestMethod.PUT)
+    public @ResponseBody int setUsuarioToken(@PathVariable("userId") String userId, @PathVariable("token") String token) {
+        return this.usuarioRepository.setUsuarioToken(token,userId);
     }
     /* ------------------------------------------------------------------------------------------------------- */
 

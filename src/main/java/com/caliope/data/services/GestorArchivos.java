@@ -55,8 +55,7 @@ public class GestorArchivos {
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found.");
             e.printStackTrace();
-        }
-        catch (IOException e1) {
+        } catch (IOException e1) {
             System.out.println("Error Reading The File.");
             e1.printStackTrace();
         }
