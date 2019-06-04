@@ -114,6 +114,12 @@ public class RestController {
     }
     /* ------------------------------------------------------------------------------------------------------- */
 
+    /* Crear Playlist */
+    @RequestMapping(value = "/createPlaylist", method = RequestMethod.POST)
+    public @ResponseBody Integer createPlaylist(@RequestParam(value = "nombrePlaylist") String nombrePlaylist, @RequestParam("userId") String userId) {
+        return this.playlistRepository.createPlaylist(nombrePlaylist, userId);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
     /* PlaylistCanciones */
     @RequestMapping(value = "/getPlaylistCanciones", method = RequestMethod.GET)
@@ -124,13 +130,11 @@ public class RestController {
     /* Encontrar todas las playlists de un usuario */
     @RequestMapping(value = "/getUserPlaylistsByUserId/{userId}", method = RequestMethod.GET)
     public @ResponseBody List<Playlist> getUserPlaylistsByUserId2(@PathVariable("userId") String userId) {
-
         return this.playlistRepository.getAllUserPlaylists(userId);
     }
 
 
-
-        /* Añadir playlist */
+    /* Añadir playlist */
     @RequestMapping(value = "/añadir/playlist", method = RequestMethod.POST)
     public @ResponseBody InfoEntity añadirPlaylist(@RequestBody Playlist playlist) {
 
