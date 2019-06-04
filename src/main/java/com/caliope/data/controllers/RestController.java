@@ -22,7 +22,6 @@ public class RestController {
     private UsuarioRepository usuarioRepository;
     private SeguidorRepository seguidorRepository;
     private CancionesMeGustaRepository cancionesMeGustaRepository;
-    private CancionComentariosRepository cancionComentariosRepository;
     private ComentarioRepository comentarioRepository;
 
     @Autowired
@@ -37,7 +36,6 @@ public class RestController {
         this.usuarioRepository            = usuarioRepository;
         this.seguidorRepository           = seguidorRepository;
         this.cancionesMeGustaRepository   = cancionesMeGustaRepository;
-        this.cancionComentariosRepository = cancionComentariosRepository;
         this.comentarioRepository         = comentarioRepository;
     }
 
