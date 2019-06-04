@@ -25,4 +25,7 @@ public interface CancionRepository extends CrudRepository<Cancion, Integer> {
     Integer deleteSongById(@Param("cancionId") Integer cancionId);
     Optional<Cancion> findById(Integer integer);
 
+    @Query(value = "SELECT cancion_path FROM cancion WHERE id = :cancionId", nativeQuery = true)
+    String getSongFilenameByCancionId(@Param("cancionId") Integer cancionId);
+
 }

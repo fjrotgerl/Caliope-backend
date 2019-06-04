@@ -189,6 +189,16 @@ public class RestController {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* ------------------------------------------------------------------------------------------------------- */
+    /* Canciones */
+    /* ------------------------------------------------------------------------------------------------------- */
+    /* Obtener nombre del archivo de la cancion por cancion ID */
+    @RequestMapping(value = "/getSongFilenameById/{cancionId}", method = RequestMethod.GET)
+    public @ResponseBody String getSongFilenameById(@PathVariable("cancionId") Integer cancionId) {
+        return this.cancionRepository.getSongFilenameByCancionId(cancionId);
+    }
+
+
+    /* ------------------------------------------------------------------------------------------------------- */
     /* Seguidores */
     /* Obtener seguidores de 'x' usuario */
     @RequestMapping(value = "/getSeguidores/{usuario}", method = RequestMethod.GET)
