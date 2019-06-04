@@ -22,18 +22,23 @@ public class RestController {
     private UsuarioRepository usuarioRepository;
     private SeguidorRepository seguidorRepository;
     private CancionesMeGustaRepository cancionesMeGustaRepository;
+    private CancionComentariosRepository cancionComentariosRepository;
+    private ComentarioRepository comentarioRepository;
 
     @Autowired
     public RestController(CancionRepository cancionRepository, GeneroRepository generoRepository, PlaylistRepository playlistRepository,
                           PlaylistCancionesRepository playlistCancionesRepository, UsuarioRepository usuarioRepository, SeguidorRepository seguidorRepository,
-                          CancionesMeGustaRepository cancionesMeGustaRepository) {
-        this.cancionRepository           = cancionRepository;
-        this.generoRepository            = generoRepository;
-        this.playlistRepository          = playlistRepository;
-        this.playlistCancionesRepository = playlistCancionesRepository;
-        this.usuarioRepository           = usuarioRepository;
-        this.seguidorRepository          = seguidorRepository;
-        this.cancionesMeGustaRepository  = cancionesMeGustaRepository;
+                          CancionesMeGustaRepository cancionesMeGustaRepository, CancionComentariosRepository cancionComentariosRepository,
+                          ComentarioRepository comentarioRepository) {
+        this.cancionRepository            = cancionRepository;
+        this.generoRepository             = generoRepository;
+        this.playlistRepository           = playlistRepository;
+        this.playlistCancionesRepository  = playlistCancionesRepository;
+        this.usuarioRepository            = usuarioRepository;
+        this.seguidorRepository           = seguidorRepository;
+        this.cancionesMeGustaRepository   = cancionesMeGustaRepository;
+        this.cancionComentariosRepository = cancionComentariosRepository;
+        this.comentarioRepository         = comentarioRepository;
     }
 
     /* ------------------------------------------------------------------------------------------------------- */
@@ -113,6 +118,25 @@ public class RestController {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* ------------------------------------------------------------------------------------------------------- */
+    /* Comentarios */
+    /* ------------------------------------------------------------------------------------------------------- */
+
+    /* Obtener lo comentarios de una cancion */
+    @RequestMapping(value = "/getComentariosFromCancion/{cancionId}", method = RequestMethod.GET)
+    public @ResponseBody List<Comentario> getComentariosFromCancion(@PathVariable("cancionId") Integer cancionId) {
+        return this.comentarioRepository.getComentariosByCancionId(cancionId);
+    }
+
+    /* Añadir un comentario */
+    @RequestMapping(value = "/addCommentByCancionId/{userId}/{cancionId}", method = RequestMethod.PUT)
+    public @ResponseBody void addCommentByCancionId(@PathVariable("userId") String userId, @PathVariable("cancionId") Integer cancionId, @RequestBody Comentario comentario) {
+        this.comentarioRepository.addComentarioACancion(comentario.getMensaje(), userId, cancionId);
+    }
+
+    /* ------------------------------------------------------------------------------------------------------- */
+
+
+    /* ------------------------------------------------------------------------------------------------------- */
     /* Playlists */
     @RequestMapping(value = "/getPlaylist", method = RequestMethod.GET)
     public @ResponseBody List<Playlist> getPlaylists() {
@@ -156,8 +180,7 @@ public class RestController {
 
     /* Obtener todas las canciones de una playlist en concreto */
     @RequestMapping(value = "/getCancionesFromPlaylist/{playlistId}", method = RequestMethod.GET)
-    public @ResponseBody
-    List<Optional<Cancion>> getPlaylistCanciones(@PathVariable("playlistId") Integer playlistId) {
+    public @ResponseBody List<Optional<Cancion>> getPlaylistCanciones(@PathVariable("playlistId") Integer playlistId) {
         List<Optional<Cancion>> canciones = new ArrayList<>();
         for ( Integer cancionId : this.playlistCancionesRepository.getAllPlaylistSong(playlistId)) {
             if (this.cancionRepository.findById(cancionId).isPresent()) { canciones.add(this.cancionRepository.findById(cancionId)); }

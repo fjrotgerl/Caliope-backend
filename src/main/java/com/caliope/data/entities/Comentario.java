@@ -17,6 +17,10 @@ public class Comentario {
     @JoinColumn(name = "usuario_fk")
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "cancion_fk")
+    private Cancion cancion;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +43,13 @@ public class Comentario {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Cancion getCancion() {
+        return cancion;
+    }
+
+    public void setCancion(Cancion cancion) {
+        this.cancion = cancion;
     }
 }
