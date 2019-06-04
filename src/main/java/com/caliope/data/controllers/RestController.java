@@ -63,6 +63,22 @@ public class RestController {
 
     }
 
+    /* Obtener todas las canciones de un usuario */
+    @RequestMapping(value = "/getSongsFromUser/{userId}", method = RequestMethod.GET)
+    public @ResponseBody List<Optional<Cancion>> getSongsFromUser(@PathVariable("userId") String userId ) {
+        List<Optional<Cancion>> canciones = new ArrayList<>();
+        for ( Integer idCancion : this.cancionRepository.getSongsFromUserById(userId)) {
+            if (this.cancionRepository.findById(idCancion).isPresent()) { canciones.add(this.cancionRepository.findById(idCancion)); }
+        }
+        return canciones;
+    }
+
+    /* Eliminar una cancion por id de cancion */
+    @RequestMapping(value = "/deleteSongById/{cancionId}", method = RequestMethod.PUT)
+    public @ResponseBody Integer deleteSongById(@PathVariable("cancionId") Integer cancionId) {
+        return this.cancionRepository.deleteSongById(cancionId);
+    }
+
     /* Obtener las canciones las cuales un usuario ha dado me gusta */
     @RequestMapping(value = "/getLikedSongsByUserId/{userId}", method = RequestMethod.GET)
     public @ResponseBody List<Optional<Cancion>> getLikedSongsByUserId (@PathVariable("userId") String userId) {
@@ -104,6 +120,18 @@ public class RestController {
     }
     /* ------------------------------------------------------------------------------------------------------- */
 
+    /* Crear Playlist */
+    @RequestMapping(value = "/createPlaylist", method = RequestMethod.POST)
+    public @ResponseBody Integer createPlaylist(@RequestParam(value = "nombrePlaylist") String nombrePlaylist, @RequestParam("userId") String userId) {
+        return this.playlistRepository.createPlaylist(nombrePlaylist, userId);
+    }
+
+    /* Borrar Playlist */
+    @RequestMapping(value = "/deletePlaylist/{playlistId}", method = RequestMethod.PUT)
+    public @ResponseBody void deletePlaylist(@PathVariable("playlistId") Integer playlistId) {
+        this.playlistRepository.deleteById(playlistId);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
     /* PlaylistCanciones */
     @RequestMapping(value = "/getPlaylistCanciones", method = RequestMethod.GET)
@@ -116,19 +144,6 @@ public class RestController {
     public @ResponseBody List<Playlist> getUserPlaylistsByUserId2(@PathVariable("userId") String userId) {
 
         return this.playlistRepository.getAllUserPlaylists(userId);
-    }
-
-
-    /* Añadir playlist */
-    @RequestMapping(value = "/añadir/playlist", method = RequestMethod.POST)
-    public @ResponseBody InfoEntity añadirPlaylist(@RequestBody Playlist playlist) {
-
-        if (this.playlistRepository.findById(playlist.getId()).isPresent()) { return new InfoEntity(HttpStatus.CONFLICT,"Playlist duplicada"); }
-
-        this.playlistRepository.save(playlist);
-
-        return new InfoEntity(HttpStatus.OK,"Playlist añadida");
-
     }
 
     /* Añadir cancion a playlist */
