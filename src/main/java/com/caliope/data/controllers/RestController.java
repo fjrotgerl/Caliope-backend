@@ -139,19 +139,6 @@ public class RestController {
         return this.playlistRepository.getAllUserPlaylists(userId);
     }
 
-
-    /* Añadir playlist */
-    @RequestMapping(value = "/añadir/playlist", method = RequestMethod.POST)
-    public @ResponseBody InfoEntity añadirPlaylist(@RequestBody Playlist playlist) {
-
-        if (this.playlistRepository.findById(playlist.getId()).isPresent()) { return new InfoEntity(HttpStatus.CONFLICT,"Playlist duplicada"); }
-
-        this.playlistRepository.save(playlist);
-
-        return new InfoEntity(HttpStatus.OK,"Playlist añadida");
-
-    }
-
     /* Añadir cancion a playlist */
     @RequestMapping(value = "/addSongToPlaylist/{playlistId}/{cancionId}", method = RequestMethod.PUT)
     public @ResponseBody int addSongToPlaylist(@PathVariable("playlistId") Integer playlistId, @PathVariable("cancionId") Integer cancionId) {
