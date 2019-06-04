@@ -120,6 +120,12 @@ public class RestController {
         return this.playlistRepository.createPlaylist(nombrePlaylist, userId);
     }
 
+    /* Borrar Playlist */
+    @RequestMapping(value = "/deletePlaylist/{playlistId}", method = RequestMethod.PUT)
+    public @ResponseBody void deletePlaylist(@PathVariable("playlistId") Integer playlistId) {
+        this.playlistRepository.deleteById(playlistId);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
     /* PlaylistCanciones */
     @RequestMapping(value = "/getPlaylistCanciones", method = RequestMethod.GET)
