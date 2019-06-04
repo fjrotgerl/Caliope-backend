@@ -197,6 +197,12 @@ public class RestController {
         return this.cancionRepository.getSongFilenameByCancionId(cancionId);
     }
 
+    /* Obtener dueño de la cancion por ID cancion */
+    @RequestMapping(value = "/getAutorCancionByCancionId/{cancionId}", method = RequestMethod.GET)
+    public @ResponseBody String getAutorCancionByCancionId(@PathVariable("cancionId") Integer cancionId) {
+        return this.cancionRepository.getSongAutorByCancionId(cancionId);
+    }
+
 
     /* ------------------------------------------------------------------------------------------------------- */
     /* Seguidores */

@@ -28,4 +28,7 @@ public interface CancionRepository extends CrudRepository<Cancion, Integer> {
     @Query(value = "SELECT cancion_path FROM cancion WHERE id = :cancionId", nativeQuery = true)
     String getSongFilenameByCancionId(@Param("cancionId") Integer cancionId);
 
+    @Query(value = "SELECT usuario_fk FROM cancion WHERE id = :cancionId", nativeQuery = true)
+    String getSongAutorByCancionId(@Param("cancionId") Integer cancionId);
+
 }
