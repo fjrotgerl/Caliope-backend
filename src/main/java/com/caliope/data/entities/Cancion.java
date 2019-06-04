@@ -1,5 +1,7 @@
 package com.caliope.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -28,6 +30,7 @@ public class Cancion {
     @JoinColumn(name = "genero_fk")
     private Genero genero;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD")
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
 
