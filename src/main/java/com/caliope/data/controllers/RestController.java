@@ -233,6 +233,13 @@ public class RestController {
         }
         return usuarios;
     }
+
+    /* Seguir a usuario */
+    @RequestMapping(value = "/followUser/{seguido}/{seguidor}", method = RequestMethod.PUT)
+    public @ResponseBody void followUser(@PathVariable("seguido") String seguido, @PathVariable("seguidor") String seguidor) {
+        this.seguidorRepository.followUser(seguido,seguidor);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* ------------------------------------------------------------------------------------------------------- */
