@@ -131,6 +131,12 @@ public class RestController {
         this.comentarioRepository.addComentarioACancion(comentario.getMensaje(), userId, cancionId);
     }
 
+    /* Borrar un comentario */
+    @RequestMapping(value = "/deleteCommentByCancionId/{commentId}", method = RequestMethod.PUT)
+    public @ResponseBody void deleteCommentByCancionId(@PathVariable("commentId") Integer commentId) {
+        this.comentarioRepository.deleteById(commentId);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
 
 
