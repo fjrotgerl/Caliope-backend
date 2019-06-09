@@ -209,6 +209,12 @@ public class RestController {
         return this.cancionRepository.getSongAutorByCancionId(cancionId);
     }
 
+    /* Guardar reproduccion */
+    @RequestMapping(value = "/addNewRepro/{idCancion}", method = RequestMethod.PUT)
+    public @ResponseBody void addNewRepro(@PathVariable("idCancion") Integer idCancion) {
+        this.cancionRepository.addOneRepro(idCancion);
+    }
+
 
     /* ------------------------------------------------------------------------------------------------------- */
     /* Seguidores */

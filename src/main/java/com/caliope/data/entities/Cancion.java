@@ -34,6 +34,9 @@ public class Cancion {
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
 
+    @Column(name = "reproducciones")
+    private Integer reproducciones;
+
     public Integer getId() {
         return id;
     }
@@ -88,5 +91,13 @@ public class Cancion {
 
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public Integer getReproducciones() {
+        return reproducciones;
+    }
+
+    public void setReproducciones(Integer reproducciones) {
+        this.reproducciones = reproducciones;
     }
 }

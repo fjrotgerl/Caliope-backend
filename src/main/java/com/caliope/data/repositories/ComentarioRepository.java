@@ -16,7 +16,7 @@ public interface ComentarioRepository extends CrudRepository<Comentario, Integer
     @Query(value = "INSERT INTO comentario (mensaje, usuario_fk, cancion_fk) VALUES (:mensaje, :userId, :cancionId)", nativeQuery = true)
     void addComentarioACancion(@Param("mensaje") String mensaje, @Param("userId") String userId, @Param("cancionId") Integer cancionId);
 
-    @Query(value = "SELECT mensaje FROM comentario WHERE cancion_fk = :cancionId", nativeQuery = true)
-    List<Comentario> getComentariosByCancionId(@Param("cancionId") Integer cancionId);
+    @Query(value = "SELECT * FROM comentario WHERE cancion_fk = :cancionFk ", nativeQuery = true)
+    List<Comentario> getComentariosByCancionId(@Param("cancionFk") Integer cancionId);
 
 }

@@ -37,4 +37,9 @@ public interface CancionRepository extends CrudRepository<Cancion, Integer> {
     @Query(value = "INSERT INTO cancion (nombre, duracion, cancion_path, usuario_fk, genero_fk, fecha_registro) VALUES (:nombre, :duracion, :cancion_path, :usuario_fk, :genero_fk, :fecha_registro)", nativeQuery = true)
     Integer addCancion(@Param("nombre") String nombre, @Param("duracion") Integer duracion, @Param("cancion_path") String cancion_path, @Param("usuario_fk") String userId, @Param("genero_fk") String genero, @Param("fecha_registro") String fechaRegistro);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE cancion SET reproducciones = ((SELECT reproducciones WHERE id = :idCancion) + 1) WHERE id = :idCancion", nativeQuery = true)
+    void addOneRepro(@Param("idCancion") Integer idCancion);
+
 }
