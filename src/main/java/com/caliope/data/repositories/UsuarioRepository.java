@@ -1,11 +1,14 @@
 package com.caliope.data.repositories;
 
+import com.caliope.data.entities.Cancion;
 import com.caliope.data.entities.Usuario;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 public interface UsuarioRepository extends CrudRepository<Usuario, String> {
@@ -20,6 +23,13 @@ public interface UsuarioRepository extends CrudRepository<Usuario, String> {
     @Transactional
     @Query(value = "UPDATE usuario SET usuario_token = :token WHERE username = :username ;", nativeQuery = true)
     int setUsuarioToken(@Param("token") String token, @Param("username") String username);
+
+    @Query(value = "SELECT * FROM `usuario` WHERE `username` LIKE %:info%", nativeQuery = true)
+    List<Usuario> getUsersThatContains(@Param("info") String info);
+
+    @Modifying
+    @Transactional
+    void deleteUsuarioByUsername(String username);
 
 
     

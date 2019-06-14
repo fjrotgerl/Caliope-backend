@@ -76,7 +76,20 @@ public class RestController {
         return canciones;
     }
 
-    /* Eliminar una cancion por id de cancion */
+    /* Obtener cancion por nombre */
+    @RequestMapping(value = "/getSongsFromName/{nombreCancion}", method = RequestMethod.GET)
+    public @ResponseBody List<Cancion> getSongsFromName (@PathVariable("nombreCancion") String nombreCancion) {
+        return this.cancionRepository.getCancionsByNombre(nombreCancion);
+    }
+
+    /* Obtener canciones que contengan 'x' */
+    @RequestMapping (value = "/getSongsThatContains/{info}", method = RequestMethod.GET)
+    public @ResponseBody List<Cancion> getSongsThatContains (@PathVariable("info") String info) {
+        return this.cancionRepository.getCancionesThatContains(info);
+    }
+
+
+        /* Eliminar una cancion por id de cancion */
     @RequestMapping(value = "/deleteSongById/{cancionId}", method = RequestMethod.PUT)
     public @ResponseBody Integer deleteSongById(@PathVariable("cancionId") Integer cancionId) {
         return this.cancionRepository.deleteSongById(cancionId);
@@ -300,5 +313,17 @@ public class RestController {
         return this.usuarioRepository.setUsuarioToken(token,username);
     }
     /* ------------------------------------------------------------------------------------------------------- */
+
+    /* Buscar un usuario por nombre */
+    @RequestMapping (value = "/getUserThatContains/{info}", method = RequestMethod.GET)
+    public @ResponseBody List<Usuario> getUserThatContains (@PathVariable("info") String info) {
+        return this.usuarioRepository.getUsersThatContains(info);
+    }
+
+    /* Eliminar un usuario por username */
+    @RequestMapping (value = "/deleteUserByUsername/{userId}", method = RequestMethod.PUT)
+    public @ResponseBody void deleteUserByUsername (@PathVariable("userId") String userId) {
+        this.usuarioRepository.deleteUsuarioByUsername(userId);
+    }
 
 }

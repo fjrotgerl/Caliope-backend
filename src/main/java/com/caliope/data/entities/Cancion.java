@@ -30,7 +30,6 @@ public class Cancion {
     @JoinColumn(name = "genero_fk")
     private Genero genero;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-DD")
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
 

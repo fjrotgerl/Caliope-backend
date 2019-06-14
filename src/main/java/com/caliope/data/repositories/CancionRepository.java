@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 import java.util.Optional;
@@ -41,5 +40,10 @@ public interface CancionRepository extends CrudRepository<Cancion, Integer> {
     @Transactional
     @Query(value = "UPDATE cancion SET reproducciones = ((SELECT reproducciones WHERE id = :idCancion) + 1) WHERE id = :idCancion", nativeQuery = true)
     void addOneRepro(@Param("idCancion") Integer idCancion);
+
+    List<Cancion> getCancionsByNombre(String nombre);
+
+    @Query(value = "SELECT * FROM cancion WHERE nombre LIKE %:info%", nativeQuery = true)
+    List<Cancion> getCancionesThatContains(@Param("info") String info);
 
 }
