@@ -1,5 +1,6 @@
 package com.caliope.data.repositories;
 
+import com.caliope.data.entities.Playlist;
 import com.caliope.data.entities.PlaylistCanciones;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,5 @@ public interface PlaylistCancionesRepository extends CrudRepository<PlaylistCanc
 
     @Query(value = "SELECT cancion_fk FROM playlist_canciones WHERE playlist_fk = :playlistId", nativeQuery = true)
     List<Integer> getAllPlaylistSong(@Param("playlistId") Integer playlistId);
+
 }

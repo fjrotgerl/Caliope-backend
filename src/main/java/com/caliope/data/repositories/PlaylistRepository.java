@@ -19,4 +19,6 @@ public interface PlaylistRepository extends CrudRepository<Playlist, Integer> {
     @Query(value = "INSERT INTO playlist (nombre, usuario_fk) VALUES (:nombrePlaylist, :userId)", nativeQuery = true)
     Integer createPlaylist(@Param("nombrePlaylist") String nombrePlaylist, @Param("userId") String userId);
 
+    Playlist findPlaylistById(Integer playlistId);
+
 }

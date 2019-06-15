@@ -3,6 +3,7 @@ package com.caliope.data.controllers;
 import com.caliope.data.entities.*;
 import com.caliope.data.error.InfoEntity;
 import com.caliope.data.repositories.*;
+import org.aspectj.apache.bcel.util.Play;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -162,8 +163,8 @@ public class RestController {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* Crear Playlist */
-    @RequestMapping(value = "/createPlaylist", method = RequestMethod.POST)
-    public @ResponseBody Integer createPlaylist(@RequestParam(value = "nombrePlaylist") String nombrePlaylist, @RequestParam("userId") String userId) {
+    @RequestMapping(value = "/createPlaylist/{nombrePlaylist}/{userId}", method = RequestMethod.POST)
+    public @ResponseBody Integer createPlaylist(@PathVariable(value = "nombrePlaylist") String nombrePlaylist, @PathVariable("userId") String userId) {
         return this.playlistRepository.createPlaylist(nombrePlaylist, userId);
     }
 
@@ -203,6 +204,12 @@ public class RestController {
             if (this.cancionRepository.findById(cancionId).isPresent()) { canciones.add(this.cancionRepository.findById(cancionId)); }
         }
         return canciones;
+    }
+
+    /* Obtener playlist por Id */
+    @RequestMapping(value = "/getPlaylistById/{playlistId}", method = RequestMethod.GET)
+    public @ResponseBody Playlist addSongToPlaylist(@PathVariable("playlistId") Integer playlistId) {
+        return this.playlistRepository.findPlaylistById(playlistId);
     }
 
     /* ------------------------------------------------------------------------------------------------------- */
