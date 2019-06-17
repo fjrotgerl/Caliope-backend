@@ -3,6 +3,7 @@ package com.caliope.data.controllers;
 import com.caliope.data.entities.*;
 import com.caliope.data.error.InfoEntity;
 import com.caliope.data.repositories.*;
+import org.apache.catalina.User;
 import org.aspectj.apache.bcel.util.Play;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -325,20 +326,6 @@ public class RestController {
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* ------------------------------------------------------------------------------------------------------- */
-    /* Obtener usuario por token */
-    @RequestMapping(value = "/getUsuarioByToken/{userToken}", method = RequestMethod.GET)
-    public @ResponseBody Usuario getUsuarioByToken(@PathVariable("userToken") String userToken) {
-        return this.usuarioRepository.findUsuarioByToken(userToken);
-    }
-    /* ------------------------------------------------------------------------------------------------------- */
-
-    /* Añadir o modificar token de usuario */
-    @RequestMapping(value = "/setUsuarioToken", method = RequestMethod.PUT)
-    public @ResponseBody int setUsuarioToken(@RequestParam String token, @RequestParam String username) {
-        return this.usuarioRepository.setUsuarioToken(token,username);
-    }
-    /* ------------------------------------------------------------------------------------------------------- */
-
     /* Buscar un usuario por nombre */
     @RequestMapping (value = "/getUserThatContains/{info}", method = RequestMethod.GET)
     public @ResponseBody List<Usuario> getUserThatContains (@PathVariable("info") String info) {
@@ -351,4 +338,15 @@ public class RestController {
         this.usuarioRepository.deleteUsuarioByUsername(userId);
     }
 
+    /* Actualizar la información básica de un usuario */
+    @RequestMapping (value = "/updateUserData/{oldUserid}", method = RequestMethod.PUT)
+    public @ResponseBody void updateUserData (@PathVariable("oldUserid") String oldUserId, @RequestBody Usuario user) {
+        this.usuarioRepository.updateUserData(user.getUsername(), user.getEmail(), user.getNombre(), user.getApellidos(), oldUserId);
+    }
+
+    /* Actualizar la contraseña de un usuario */
+    @RequestMapping (value = "/updateUserPassword/{userId}", method = RequestMethod.POST)
+    public @ResponseBody void updateUserPassword (@PathVariable("userId") String userId, @RequestBody OldNewPassword user) {
+        this.usuarioRepository.updateUserPassword(user.getNewPassword(), user.getOldPassword(), userId);
+    }
 }

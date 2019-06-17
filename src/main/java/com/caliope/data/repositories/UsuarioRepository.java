@@ -17,13 +17,6 @@ public interface UsuarioRepository extends CrudRepository<Usuario, String> {
 
     Usuario findUsuarioByEmail(String email);
 
-    Usuario findUsuarioByToken(String token);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE usuario SET usuario_token = :token WHERE username = :username ;", nativeQuery = true)
-    int setUsuarioToken(@Param("token") String token, @Param("username") String username);
-
     @Query(value = "SELECT * FROM `usuario` WHERE `username` LIKE %:info%", nativeQuery = true)
     List<Usuario> getUsersThatContains(@Param("info") String info);
 
@@ -31,6 +24,14 @@ public interface UsuarioRepository extends CrudRepository<Usuario, String> {
     @Transactional
     void deleteUsuarioByUsername(String username);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE usuario SET username = :newUserId, email = :userEmail, nombre = :userName, apellidos = :userSurename WHERE username = :oldUserId", nativeQuery = true)
+    void updateUserData(@Param("newUserId") String newUserid, @Param("userEmail") String userEmail, @Param("userName") String userName, @Param("userSurename") String userSurename, @Param("oldUserId") String oldUserId);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE usuario SET contraseña = :newPassword WHERE username = :userId AND contraseña = :oldPassword", nativeQuery = true)
+    void updateUserPassword(@Param("newPassword") String newPassword, @Param("oldPassword") String oldPassword, @Param("userId") String userId);
     
 }
