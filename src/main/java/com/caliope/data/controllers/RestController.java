@@ -119,6 +119,12 @@ public class RestController {
         return this.cancionesMeGustaRepository.deleteByUsuarioAndCancion(userId, cancionId);
     }
 
+    /* Saber si a un usuario le gusta x cancion */
+    @RequestMapping(value = "/isThisSongLikedByTheUser/{cancionId}/{userId}", method = RequestMethod.GET)
+    public @ResponseBody String isThisSongLikedByTheUser (@PathVariable("cancionId") Integer cancionId, @PathVariable("userId") String userId) {
+        return this.cancionesMeGustaRepository.isThisSongLikedByTheUser(cancionId, userId);
+    }
+
     /* ------------------------------------------------------------------------------------------------------- */
 
     /* ------------------------------------------------------------------------------------------------------- */
@@ -172,6 +178,12 @@ public class RestController {
     @RequestMapping(value = "/deletePlaylist/{playlistId}", method = RequestMethod.PUT)
     public @ResponseBody void deletePlaylist(@PathVariable("playlistId") Integer playlistId) {
         this.playlistRepository.deleteById(playlistId);
+    }
+
+    /* Obtener un numbero random de playlists */
+    @RequestMapping(value = "/getRandomPlaylists/{number}", method = RequestMethod.GET)
+    public @ResponseBody List<Playlist> getRandomPlaylists(@PathVariable("number") Integer number) {
+        return this.playlistRepository.getRandomPlaylists(number);
     }
 
     /* ------------------------------------------------------------------------------------------------------- */
@@ -233,6 +245,12 @@ public class RestController {
     @RequestMapping(value = "/addNewRepro/{idCancion}", method = RequestMethod.PUT)
     public @ResponseBody void addNewRepro(@PathVariable("idCancion") Integer idCancion) {
         this.cancionRepository.addOneRepro(idCancion);
+    }
+
+    /* Obtener un numero de canciones aleatorias */
+    @RequestMapping(value = "/getRandomSongs/{number}", method = RequestMethod.GET)
+    public @ResponseBody List<Cancion> getRandomSongs(@PathVariable("number") Integer number) {
+        return this.cancionRepository.getRandomSongs(number);
     }
 
 

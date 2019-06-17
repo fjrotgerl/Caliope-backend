@@ -21,4 +21,7 @@ public interface PlaylistRepository extends CrudRepository<Playlist, Integer> {
 
     Playlist findPlaylistById(Integer playlistId);
 
+    @Query(value = "SELECT * FROM playlist ORDER BY RAND ( ) LIMIT :numberPlaylists", nativeQuery = true)
+    List<Playlist> getRandomPlaylists(@Param("numberPlaylists") Integer number);
+
 }

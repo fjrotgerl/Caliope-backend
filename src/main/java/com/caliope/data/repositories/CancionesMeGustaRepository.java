@@ -24,5 +24,8 @@ public interface CancionesMeGustaRepository extends CrudRepository<CancionesMeGu
     @Query(value = "DELETE FROM canciones_megusta WHERE usuario_fk = :userId AND cancion_fk = :cancionId", nativeQuery = true)
     int deleteByUsuarioAndCancion(String userId, Integer cancionId);
 
+    @Query(value = "SELECT usuario_fk FROM canciones_megusta WHERE cancion_fk = :cancionId AND usuario_fk = :userId",nativeQuery = true)
+    String isThisSongLikedByTheUser(@Param("cancionId") Integer cancionId, @Param("userId") String userId);
+
 
 }

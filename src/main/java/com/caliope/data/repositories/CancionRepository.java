@@ -46,4 +46,7 @@ public interface CancionRepository extends CrudRepository<Cancion, Integer> {
     @Query(value = "SELECT * FROM cancion WHERE nombre LIKE %:info%", nativeQuery = true)
     List<Cancion> getCancionesThatContains(@Param("info") String info);
 
+    @Query(value = "SELECT * FROM cancion ORDER BY RAND ( ) LIMIT :numberSongs", nativeQuery = true)
+    List<Cancion> getRandomSongs(@Param("numberSongs") Integer number);
+
 }
