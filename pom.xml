@@ -11,12 +11,13 @@
     <groupId>com.caliope</groupId>
     <artifactId>data</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>data</name>
+    <name>caliopebackend</name>
     <description>Demo project for Spring Boot</description>
     <packaging>war</packaging>
 
     <properties>
         <java.version>1.8</java.version>
+        <start-class>com.caliope.data.DataApplication</start-class>
     </properties>
 
     <dependencies>
@@ -27,14 +28,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -59,13 +52,25 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>caliopebackend</finalName>
+
         <plugins>
             <plugin>
+
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.caliope.data.DataApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

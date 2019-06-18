@@ -25,7 +25,7 @@ public class GestorArchivos {
     public void subir(MultipartFile file, String username) {
         try {
             byte[] bytes = file.getBytes();
-            String directorioSinArchivo = this.directorio + "//" + username + "//mis_canciones//";
+            String directorioSinArchivo = this.directorio + "\\" + username + "\\mis_canciones\\";
             Path path = Paths.get(directorioSinArchivo);
 
             if (!Files.exists(path)) {
