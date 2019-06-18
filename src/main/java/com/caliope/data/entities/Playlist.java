@@ -2,6 +2,7 @@ package com.caliope.data.entities;
 
 import javax.persistence.*;
 
+@SuppressWarnings("ALL")
 @Entity
 public class Playlist {
 
